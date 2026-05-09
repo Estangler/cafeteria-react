@@ -1,11 +1,12 @@
 import Card from "./components/Card";
 import Cart from "./components/Cart";
 import { ITEMS, type Items } from "./data/items";
-import { useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { INITIAL_STATE, reducer } from "./reducer/cardReducer";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const [checkout, setCheckout] = useState<boolean>(false);
 
   function onAddItem(item: Items) {
     dispatch({ type: "ADD_ITEM", payload: item });
@@ -18,6 +19,23 @@ function App() {
   function onDeleteItem(id: Pick<Items, "id">) {
     dispatch({ type: "DELETE_ITEM", payload: id });
   }
+
+  function onClearCart() {
+    dispatch({ type: "CLEAR_CART" });
+  }
+
+  function onCheckout() {
+    setCheckout(true);
+    dispatch({ type: "CLEAR_CART" });
+  }
+
+  useEffect(() => {
+    const handleCheckout = setInterval(() => {
+      setCheckout(false);
+    }, 2000);
+
+    return () => clearInterval(handleCheckout);
+  }, [checkout]);
 
   return (
     <main className="space-y-10 p-8">
@@ -34,6 +52,9 @@ function App() {
             onAddItem={onAddItem}
             onRemoveItem={onRemoveItem}
             onDeleteItem={onDeleteItem}
+            onClearCart={onClearCart}
+            onCheckout={onCheckout}
+            checkout={checkout}
           />
         </div>
       </div>
