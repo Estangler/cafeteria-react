@@ -1,26 +1,9 @@
-import type { CartItem } from "../reducer/cardReducer";
+import { useCart } from "../context/useCart";
 import Button from "./Button";
 import Item from "./Item";
 
-type CartProps = {
-  items: CartItem[];
-  onAddItem: (item: CartItem) => void;
-  onRemoveItem: (item: CartItem) => void;
-  onDeleteItem: (id: Pick<CartItem, "id">) => void;
-  onClearCart: () => void;
-  onCheckout: () => void;
-  checkout: boolean;
-};
-
-export default function Cart({
-  items,
-  onAddItem,
-  onRemoveItem,
-  onDeleteItem,
-  onClearCart,
-  onCheckout,
-  checkout,
-}: CartProps) {
+export default function Cart() {
+  const { onClearCart, onCheckout, checkout, items } = useCart();
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
   const total = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -61,12 +44,7 @@ export default function Cart({
       ) : (
         items.map((item) => (
           <div className="w-full" key={item.id}>
-            <Item
-              item={item}
-              onAddItem={onAddItem}
-              onRemoveItem={onRemoveItem}
-              onDeleteItem={onDeleteItem}
-            />
+            <Item item={item} />
           </div>
         ))
       )}

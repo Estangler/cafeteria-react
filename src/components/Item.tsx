@@ -1,19 +1,13 @@
 import type { CartItem } from "../reducer/types";
 import Button from "./Button";
+import { useCart } from "../context/useCart";
 
 type ItemProps = {
   item: CartItem;
-  onAddItem: (item: CartItem) => void;
-  onRemoveItem: (item: CartItem) => void;
-  onDeleteItem: (id: Pick<CartItem, "id">) => void;
 };
 
-export default function Item({
-  item,
-  onAddItem,
-  onRemoveItem,
-  onDeleteItem,
-}: ItemProps) {
+export default function Item({ item }: ItemProps) {
+  const { onAddItem, onRemoveItem, onDeleteItem } = useCart();
   return (
     <section className="flex items-center justify-between border-b border-gray-200 py-3">
       <div className="flex items-center gap-2">

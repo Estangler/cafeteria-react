@@ -1,13 +1,13 @@
 import type { Items } from "../data/items";
 import Button from "./Button";
+import { useCart } from "../context/useCart";
 
 type CardProps = {
   itemsList: Items[];
-  onAddItem: (item: Items) => void;
-  isCheckout: boolean;
 };
 
-export default function Card({ itemsList, onAddItem, isCheckout }: CardProps) {
+export default function Card({ itemsList }: CardProps) {
+  const { onAddItem, checkout } = useCart();
   return (
     <>
       {itemsList.map((item) => (
@@ -28,7 +28,7 @@ export default function Card({ itemsList, onAddItem, isCheckout }: CardProps) {
           <Button
             onClick={() => onAddItem(item)}
             variant={"custom"}
-            disabled={isCheckout}
+            disabled={checkout}
             className="disabled:cursor-not-allowed disabled:opacity-50"
           >
             + Adicionar
