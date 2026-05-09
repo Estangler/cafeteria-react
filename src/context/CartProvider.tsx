@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect, useReducer, useState } from "react";
-import { INITIAL_STATE, reducer } from "../reducer/cardReducer";
+import { INITIAL_STATE, reducer } from "../reducer/cartReducer";
 import type { Items } from "../data/items";
 import { CartContext } from "./cartContext";
 
@@ -17,7 +17,7 @@ export function CartProvider({ children }: CartProviderProps) {
       setCheckout(false);
     }, 5000);
 
-    return () => clearInterval(handleCheckout);
+    return () => clearTimeout(handleCheckout);
   }, [checkout]);
 
   function onAddItem(item: Items) {
