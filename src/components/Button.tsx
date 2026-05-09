@@ -16,6 +16,7 @@ const buttonVariant = {
 export default function Button({
   children,
   onClick,
+  disabled,
   className,
   variant,
 }: ButtonProps) {
@@ -23,6 +24,7 @@ export default function Button({
     <button
       className={`${className} ${buttonVariant[variant]} cursor-pointer mt-auto hover:opacity-85 transition-all duration-150 ease-linear`}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

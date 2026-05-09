@@ -1,4 +1,4 @@
-import type { CartItem } from "../reducer/cardReducer";
+import type { CartItem } from "../reducer/types";
 import Button from "./Button";
 
 type ItemProps = {

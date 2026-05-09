@@ -4,9 +4,10 @@ import Button from "./Button";
 type CardProps = {
   itemsList: Items[];
   onAddItem: (item: Items) => void;
+  isCheckout: boolean;
 };
 
-export default function Card({ itemsList, onAddItem }: CardProps) {
+export default function Card({ itemsList, onAddItem, isCheckout }: CardProps) {
   return (
     <>
       {itemsList.map((item) => (
@@ -24,7 +25,12 @@ export default function Card({ itemsList, onAddItem }: CardProps) {
             })}
           </p>
 
-          <Button onClick={() => onAddItem(item)} variant={"custom"}>
+          <Button
+            onClick={() => onAddItem(item)}
+            variant={"custom"}
+            disabled={isCheckout}
+            className="disabled:cursor-not-allowed disabled:opacity-50"
+          >
             + Adicionar
           </Button>
         </div>
