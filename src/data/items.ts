@@ -1,5 +1,3 @@
-import type { CartItem } from "../reducer/cardReducer";
-
 export type Items = {
   id: number;
   icon: string;
@@ -8,14 +6,13 @@ export type Items = {
   price: number;
 };
 
-export const items: CartItem[] = [
+export const ITEMS: Items[] = [
   {
     id: 0,
     icon: "☕",
     label: "Café Especial",
     category: "Bebidas",
     price: 29.9,
-    quantity: 0,
   },
 
   {
@@ -24,7 +21,6 @@ export const items: CartItem[] = [
     label: "Croissant",
     category: "Pães",
     price: 8.5,
-    quantity: 0,
   },
   {
     id: 2,
@@ -32,7 +28,6 @@ export const items: CartItem[] = [
     label: "Suco de Laranja",
     category: "Bebidas",
     price: 12.0,
-    quantity: 0,
   },
   {
     id: 3,
@@ -40,7 +35,6 @@ export const items: CartItem[] = [
     label: "Bolo de Cenoura",
     category: "Doces",
     price: 18.0,
-    quantity: 0,
   },
   {
     id: 4,
@@ -48,7 +42,6 @@ export const items: CartItem[] = [
     label: "Sanduíche Natural",
     category: "Salgados",
     price: 22.5,
-    quantity: 0,
   },
   {
     id: 5,
@@ -56,6 +49,5 @@ export const items: CartItem[] = [
     label: "Água com Gás",
     category: "Bebidas",
     price: 5.0,
-    quantity: 0,
   },
 ];

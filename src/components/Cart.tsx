@@ -4,9 +4,17 @@ import Item from "./Item";
 
 type CartProps = {
   items: CartItem[];
+  onAddItem: (item: CartItem) => void;
+  onRemoveItem: (item: CartItem) => void;
+  onDeleteItem: (id: Pick<CartItem, "id">) => void;
 };
 
-export default function Cart({ items }: CartProps) {
+export default function Cart({
+  items,
+  onAddItem,
+  onRemoveItem,
+  onDeleteItem,
+}: CartProps) {
   return (
     <div className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col gap-3 h-fit sticky top-0  w-full">
       <header className="flex justify-between">
@@ -31,7 +39,12 @@ export default function Cart({ items }: CartProps) {
       ) : (
         items.map((item) => (
           <div className="w-full" key={item.id}>
-            <Item item={item} />
+            <Item
+              item={item}
+              onAddItem={onAddItem}
+              onRemoveItem={onRemoveItem}
+              onDeleteItem={onDeleteItem}
+            />
           </div>
         ))
       )}

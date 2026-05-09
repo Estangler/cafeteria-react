@@ -1,13 +1,12 @@
-import type { CartItem } from "../reducer/cardReducer";
+import type { Items } from "../data/items";
 import Button from "./Button";
 
 type CardProps = {
-  itemsList: CartItem[];
-  onAddItem: (item: CartItem) => void;
+  itemsList: Items[];
+  onAddItem: (item: Items) => void;
 };
 
 export default function Card({ itemsList, onAddItem }: CardProps) {
-  console.log(itemsList);
   return (
     <>
       {itemsList.map((item) => (

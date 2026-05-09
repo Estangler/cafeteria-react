@@ -9,15 +9,17 @@ export const INITIAL_STATE: CartItem[] = [];
 type Action =
   | {
       type: "ADD_ITEM";
-      payload: CartItem;
+      payload: Items;
     }
-  | { type: "REMOVE_ITEM"; payload: number };
+  | { type: "REMOVE_ITEM"; payload: Items }
+  | { type: "DELETE_ITEM"; payload: Pick<Items, "id"> };
 
-export function reducer(state: CartItem[], action: Action) {
+export function reducer(state: CartItem[], action: Action): CartItem[] {
   switch (action.type) {
     case "ADD_ITEM": {
-      const itemExists = state.find((item) => item.id === action.payload.id);
-      if (itemExists) {
+      const itemExist = state.find((item) => item.id === action.payload.id);
+
+      if (itemExist) {
         return state.map((item) =>
           item.id === action.payload.id
             ? { ...item, quantity: item.quantity + 1 }
@@ -25,11 +27,33 @@ export function reducer(state: CartItem[], action: Action) {
         );
       }
 
-      return [...state, action.payload];
+      return [...state, { ...action.payload, quantity: 1 }];
     }
 
-    case "REMOVE_ITEM":
-      return state.filter((item) => item.id !== action.payload);
+    case "REMOVE_ITEM": {
+      const itemExist = state.find((item) => item.id === action.payload.id);
+
+      if (!itemExist) {
+        return state;
+      }
+
+      if (itemExist.quantity === 1) {
+        return state.filter((item) => item.id !== action.payload.id);
+      }
+
+      if (itemExist) {
+        return state.map((item) =>
+          item.id === action.payload.id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item,
+        );
+      }
+      return state;
+    }
+
+    case "DELETE_ITEM": {
+      return state.filter((item) => item.id !== action.payload.id);
+    }
     default:
       return state;
   }
