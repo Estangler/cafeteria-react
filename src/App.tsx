@@ -9,7 +9,9 @@ function App() {
 
       <div className="grid grid-cols-2 gap-2 w-fit">
         <div className="grid grid-cols-2 gap-2 w-fit">
-          <Card itemsList={ITEMS} />
+          {ITEMS.map((item) => (
+            <Card itemsList={item} />
+          ))}
         </div>
 
         <div>
